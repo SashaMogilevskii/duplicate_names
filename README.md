@@ -1,28 +1,29 @@
-# Duplicate_names
+# Matching Of Duplicate Company Names
 
 
 ## Installation
 
 ``` shell
-# apt install required packages
+# apt install required packages:
 sudo apt update
 sudo apt install -y zip htop pipenv
   
 # clone repo:
 git cline https://github.com/SashaMogilevskii/duplicate_names.git
 
-# create virtualenv:  
+# go to the folder:
+cd duplicate_names
+
+# create virtualenv:
 pipenv install
 
-# activate virtualenv:  
+# activate virtualenv:
 pipenv shell
 
-# run main.py
+# run main.py:
 pipenv run python main.py
 
 ```
-
-
 
 
 ## Contributors
