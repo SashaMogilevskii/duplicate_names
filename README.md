@@ -9,7 +9,7 @@ sudo apt update
 sudo apt install -y zip htop pipenv
   
 # clone repo:
-git cline https://github.com/SashaMogilevskii/duplicate_names.git
+git clone https://github.com/SashaMogilevskii/duplicate_names.git
 
 # go to the folder:
 cd duplicate_names

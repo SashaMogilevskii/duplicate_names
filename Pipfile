@@ -13,6 +13,8 @@ matplotlib = "*"
 tqdm = "*"
 scipy = "*"
 mypy = "*"
+translate = "*"
+transliterate = "*"
 
 [dev-packages]
 black = "*"
