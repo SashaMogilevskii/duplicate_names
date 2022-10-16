@@ -1,5 +1,5 @@
 from fuzzywuzzy import fuzz
-from scripts.models.base_model import BaseModel
+from base_model import BaseModel
 
 
 class FuzzyWuzzyModel(BaseModel):
