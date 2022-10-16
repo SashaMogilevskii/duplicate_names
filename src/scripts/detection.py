@@ -1,34 +1,34 @@
 import pandas as pd
 
-from scr.scripts.script import Preprocessing
+from scripts.script import Preprocessing
 from fuzzywuzzy import fuzz
 
-class Detection():
+class Detection:
 
-    list_company_in_base = pd.read_csv('data/database.csv').name_1.unique()
-    data = pd.read_csv('data/database.csv')
+    def __init__(self, preprocessing: Preprocessing):
+        self.data = pd.read_csv('data/database.csv')
+        self.list_company_in_base = self.data.name_1.unique()
+        self.preprocessing = preprocessing
 
-    @classmethod
-    def check_name(cls, company_name):
+    def check_name(self, company_name: str) -> bool:
         """
         Check company_name in SQL_base
         :param company_name:
         :return: True or False
         """
 
-        return company_name in cls.list_company_in_base
+        return company_name in self.list_company_in_base
 
-    @classmethod
-    def predict_names(cls, company_names, k=7):
+    def predict_names(self, company_names: str, k: int = 7) -> list[tuple]:
         """
         model - predict
         :param company_names:
         :return:
         """
-        data = cls.data
+        data = self.data.copy()
 
         ## baseline
-        update_names = Preprocessing.preproccessing(company_names)
+        update_names = self.preprocessing.preproccessing_name(company_names)
 
         data['fuzz'] = data.apply(lambda x: fuzz.partial_ratio(x.name_1_upd, update_names), axis=1)
         df_company = data.sort_values('fuzz', ascending=False)[["name_1", 'fuzz']][:k]
