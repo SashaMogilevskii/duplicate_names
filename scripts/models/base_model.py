@@ -23,7 +23,3 @@ class BaseModel(ABC):
         :return: list with tuples.
         """
         pass
-
-
-§
-
