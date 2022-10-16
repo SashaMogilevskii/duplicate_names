@@ -1,4 +1,4 @@
-from detection import predict_names, check
+from scr.scripts.detection import Detection
 
 
 def main():
@@ -6,7 +6,7 @@ def main():
     company_name = input('Please write name_company:.. ')
 
     print(f'Name company: {company_name}')
-    check_name = check(company_name)
+    check_name = Detection.check_name(company_name)
 
     if check_name:
         print('Company found!')
@@ -15,7 +15,7 @@ def main():
         print('Company not found, perhaps you meant:')
         print('-------------------------')
 
-        list_similar_names = predict_names(company_name)
+        list_similar_names = Detection.predict_names(company_name)
         for name, probability in list_similar_names:
             print(f'Company: {name}, probability {probability:.2f}')
 

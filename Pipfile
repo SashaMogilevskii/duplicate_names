@@ -15,6 +15,7 @@ scipy = "*"
 mypy = "*"
 translate = "*"
 transliterate = "*"
+fuzzywuzzy = "*"
 
 [dev-packages]
 black = "*"
