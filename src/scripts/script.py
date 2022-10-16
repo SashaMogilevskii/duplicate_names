@@ -2,23 +2,22 @@ from transliterate import translit
 from configs.config import list_words, rus_letters
 
 
-class Preprocessing():
-
+class Preprocessing:
     popular_words = list_words
     rus_letters = rus_letters
 
     @staticmethod
-    def convert_str_to_eng(company_name: str, language_code:str = 'ru') -> str:
+    def convert_str_to_eng(company_name: str, language_code: str = "ru") -> str:
         """
         The function checks the string and translates to English,
         and delete 'OOO' and other abbreviation iin Russian names
         """
 
         if any([i in rus_letters for i in company_name]):
-            company_name = company_name.replace('ООО', '')
-            company_name = company_name.replace('ОАО', '')
-            company_name = company_name.replace('АО', '')
-            company_name = company_name.replace('ГК', '')
+            company_name = company_name.replace("ООО", "")
+            company_name = company_name.replace("ОАО", "")
+            company_name = company_name.replace("АО", "")
+            company_name = company_name.replace("ГК", "")
 
             return translit(company_name, language_code=language_code, reversed=True)
 
@@ -30,16 +29,16 @@ class Preprocessing():
         Delete all symbols in name_company
         """
 
-        update_name = ''
+        update_name = ""
 
         for ch in company_name:
             if ch.isalnum():
                 update_name += ch
             else:
-                update_name += ' '
+                update_name += " "
 
         update_name = update_name.strip()
-        update_name = ' '.join(update_name.split())
+        update_name = " ".join(update_name.split())
 
         return update_name
 
@@ -49,10 +48,10 @@ class Preprocessing():
         """
 
         update_name = []
-        company_name = company_name.replace(',', ' ')
+        company_name = company_name.replace(",", " ")
 
         update_name = [word for word in company_name.split() if word not in self.popular_words]
-        return ' '.join(update_name)
+        return " ".join(update_name)
 
     def preproccessing_name(self, company_name: str) -> str:
         """

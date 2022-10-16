@@ -10,10 +10,14 @@ class FuzzyWuzzyModel(BaseModel):
     def predict(self, company_name_check: str, company_name_from_db: list, k: int = 5) -> list[tuple]:
         prediction = []
         for company_name_from_list in company_name_from_db:
-            prediction.append(tuple([
-                company_name_from_list,  # company name
-                self.model.token_set_ratio(company_name_check, company_name_from_list) * 0.01  # proba
-            ]))
+            prediction.append(
+                tuple(
+                    [
+                        company_name_from_list,  # company name
+                        self.model.token_set_ratio(company_name_check, company_name_from_list) * 0.01,  # proba
+                    ]
+                )
+            )
 
         predicted = sorted(prediction, key=lambda x: x[1])
 
