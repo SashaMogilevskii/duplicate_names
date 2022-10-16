@@ -7,7 +7,6 @@ class Preprocessing():
     popular_words = list_words
     rus_letters = rus_letters
 
-
     @staticmethod
     def convert_str_to_eng(company_name: str, language_code:str = 'ru') -> str:
         """
@@ -44,8 +43,7 @@ class Preprocessing():
 
         return update_name
 
-    @staticmethod
-    def drop_popular_words(company_name: str) -> str:
+    def drop_popular_words(self, company_name: str) -> str:
         """
         Drop popular words from company_name
         """
@@ -53,14 +51,10 @@ class Preprocessing():
         update_name = []
         company_name = company_name.replace(',', ' ')
 
-        # for word in company_name.split():
-        #     if word not in popular_words:
-        #         update_name.append(word)
-        update_name = [word for word in company_name.split() if word not in Preprocessing.popular_words]
+        update_name = [word for word in company_name.split() if word not in self.popular_words]
         return ' '.join(update_name)
 
-    @staticmethod
-    def preproccessing_name(company_name: str) -> str:
+    def preproccessing_name(self, company_name: str) -> str:
         """
         Function, which include 3 function:
         1. convert_string_to_english
@@ -68,8 +62,7 @@ class Preprocessing():
         3. replace_symbols
         """
 
-        company_name = Preprocessing.convert_str_to_eng(company_name)
-        company_name = Preprocessing.drop_popular_words(company_name)
-        company_name = Preprocessing.replace_symbols(company_name)
-
+        company_name = self.convert_str_to_eng(company_name)
+        company_name = self.drop_popular_words(company_name)
+        company_name = self.replace_symbols(company_name)
         return company_name
