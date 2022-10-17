@@ -1,0 +1,2 @@
+class Simplemodel():
+    pass
