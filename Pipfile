@@ -13,6 +13,8 @@ translate = "*"
 transliterate = "*"
 fuzzywuzzy = "*"
 polyfuzz = "*"
+fastapi = "==0.79.0"
+uvicorn = "*"
 
 [dev-packages]
 black = "*"

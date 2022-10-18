@@ -1,14 +1,15 @@
 import pandas as pd
 
-from script import Preprocessing
-from fuzzywuzzy import fuzz
+from models.fuzzywuzzy_model import FuzzyWuzzyModel
+from scripts.script import Preprocessing
 
 
 class Detection:
-    def __init__(self, preprocessing: Preprocessing):
-        self.data = pd.read_csv("data/database.csv")
+    def __init__(self, preprocessing: Preprocessing, fuzzy_wuzzy_model: FuzzyWuzzyModel):
+        self.data = pd.read_csv("../data/database.csv")
         self.list_company_in_base = self.data.name_1.unique()
         self.preprocessing = preprocessing
+        self.models: dict[str, FuzzyWuzzyModel] = {"fuzzy_wuzzy": fuzzy_wuzzy_model}
 
     def check_name(self, company_name: str) -> bool:
         """
@@ -19,24 +20,19 @@ class Detection:
 
         return company_name in self.list_company_in_base
 
-    def predict_names(self, company_names: str, k: int = 7) -> list[tuple[str, float]]:
+    def predict_names(self, company_names: str, model="fuzzy_wuzzy", k: int = 7) -> list[tuple[str, float]]:
         """
         model - predict
+        :param k:
         :param company_names:
         :return:
         """
         data = self.data.copy()
 
         # baseline
-        update_names = self.preprocessing.preproccessing_name(company_names)
+        company_name = self.preprocessing.preproccessing_name(company_names)
 
-        data["fuzz"] = data.apply(lambda x: fuzz.partial_ratio(x.name_1_upd, update_names), axis=1)
-        df_company = data.sort_values("fuzz", ascending=False)[["name_1", "fuzz"]][:k]
-        list_company = []
+        predicts = self.models[model].predict(company_name=company_name, db_companies=data, k=k)
+        print(f"company_name: {company_name}, predicts: {predicts}")
 
-        for i, row in df_company.iterrows():
-            list_company.append((row["name_1"], row["fuzz"] / 100))
-
-        print(f"Company: {company_names}, update_name: {update_names}")
-
-        return list_company
+        return predicts

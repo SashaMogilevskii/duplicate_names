@@ -14,11 +14,11 @@ class BaseModel(ABC):
         """
         pass
 
-    def predict(self, company_name_check: str, company_name_from_db: list, k: int = 5) -> list[tuple]:
+    def predict(self, company_name: str, company_from_db: pd.DataFrame, k: int = 5) -> list[tuple]:
         """
 
-        :param company_name_check: company
-        :param company_name_from_db: list of company names
+        :param company_name: company
+        :param company_from_db: df of company names
         :param k: k top relevant company names
         :return: list with tuples.
         """

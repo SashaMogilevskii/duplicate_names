@@ -1,24 +1,21 @@
+import pandas as pd
 from fuzzywuzzy import fuzz
-from base_model import BaseModel
+
+from models.base_model import BaseModel
 
 
 class FuzzyWuzzyModel(BaseModel):
     def __init__(self):
         super().__init__()
-        self.model = fuzz
 
-    def predict(self, company_name_check: str, company_name_from_db: list, k: int = 5) -> list[tuple]:
-        prediction = []
-        for company_name_from_list in company_name_from_db:
-            prediction.append(
-                tuple(
-                    [
-                        company_name_from_list,  # company name
-                        self.model.token_set_ratio(company_name_check, company_name_from_list) * 0.01,  # proba
-                    ]
-                )
-            )
+    def predict(self, company_name: str, db_companies: pd.DataFrame, k: int = 5) -> list[tuple[str, float]]:
+        db_companies["fuzz"] = db_companies.name_1_upd.apply(lambda x: fuzz.token_set_ratio(x, company_name))
+        db_companies = db_companies.sort_values("fuzz", ascending=False).reset_index(drop=True)
+        df_predict = db_companies.loc[:k, ["name_1", "fuzz"]]
+        df_predict.loc[:, "probability"] = df_predict.fuzz / 100
+        predictions = []
 
-        predicted = sorted(prediction, key=lambda x: x[1])
+        for i, row in df_predict.iterrows():
+            predictions.append((row["name_1"], row["fuzz"] / 100))
 
-        return predicted[:k]
+        return predictions

@@ -1,3 +1,5 @@
+import pickle
+
 import pandas as pd
 from polyfuzz import PolyFuzz
 
@@ -18,6 +20,11 @@ class TfIdfMolel(BaseModel):
     def __init__(self):
         super().__init__()
         self.model = PolyFuzz("TF-IDF")
+        self.model_path = None
 
-    def train(self, data: pd.DataFrame) -> None:
-        self.model.fit(train_words)
+    def train(self, data: pd.Series) -> None:
+        self.model.fit(data)
+
+    def save_model(self):
+        with open(self.model_path, "wb+") as f:
+            pickle.dump(self.model, f)
