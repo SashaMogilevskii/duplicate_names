@@ -12,12 +12,13 @@ app = FastAPI()
 
 
 @app.post("/match_companies")
-async def route(company_name: str) -> list[tuple[str, float]]:
+async def route(company_name: str, k: int) -> list[tuple[str, float]]:
+
     check_name = detection.check_name(company_name)
     if check_name:
         return [(company_name, 1)]
 
     else:
         print("Company not found, perhaps you meant:")
-        list_similar_names = detection.predict_names(company_name)
+        list_similar_names = detection.predict_names(company_name, k=k)
     return list_similar_names
