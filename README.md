@@ -31,3 +31,10 @@ pipenv run python main.py
 1. Шакиров Ренат
 2. Набатчиков Илья
 3. Могилевский Саша
+
+``` shell
+For contributing please use linterts and hooks the following commands:
+
+black .
+pre-commit run --all-files
+ ```
