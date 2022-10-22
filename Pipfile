@@ -15,6 +15,7 @@ fuzzywuzzy = "*"
 polyfuzz = "*"
 fastapi = "==0.79.0"
 uvicorn = "*"
+catboost = "*"
 
 [dev-packages]
 black = "*"
