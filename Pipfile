@@ -6,7 +6,7 @@ name = "pypi"
 [packages]
 pandas = "*"
 numpy = "*"
-scikit-learn = "*"
+scikit-learn = "==1.0.2"
 pylama = "*"
 mypy = "*"
 translate = "*"
@@ -16,6 +16,7 @@ polyfuzz = "*"
 fastapi = "==0.79.0"
 uvicorn = "*"
 catboost = "*"
+python-levenshtein = "*"
 
 [dev-packages]
 black = "*"

@@ -1,23 +1,17 @@
 import pandas as pd
-import pickle
-
-from catboost import CatBoostClassifier
 
 from models.base_model import BaseModel
 
-
-model = CatBoostClassifier()  # parameters not required.
-model.load_model("./models/modelCatBoost.cbm")
-tf_idf = pickle.load(open("./models/tfidf1.pkl", "rb"))
+from pydantic_models import Predict
 
 
 class CatBoostModel(BaseModel):
-    def __init__(self):
+    def __init__(self, tf_idf_path: str, catboost_path: str):
         super().__init__()
-        self.tfidf = tf_idf
-        self.model = model
+        self.tfidf = self.load_model(tf_idf_path)
+        self.model = self.load_model(catboost_path)
 
-    def predict(self, company_name: str, db_companies: pd.DataFrame, k: int = 5) -> list[tuple[str, float]]:
+    def predict(self, company_name: str, db_companies: pd.DataFrame, k: int) -> list[Predict]:
         db_companies["add_company"] = company_name
 
         # Transforms name1 in base and company_name in tf_idf
@@ -37,11 +31,11 @@ class CatBoostModel(BaseModel):
         name_data = (
             name_data.sort_values("probability", ascending=False)
             .reset_index(drop=True)
-            .loc[:k, ["name_1", "probability"]]
+            .loc[:k - 1, ["name_1", "probability"]]
         )
-        predictions = []
 
-        for i, row in name_data.iterrows():
-            predictions.append((row["name_1"], row["probability"] / 100))
+        predictions = [
+            Predict(company_name=row["name_1"], probability=row["probability"] / 100) for _, row in name_data.iterrows()
+        ]
 
         return predictions

@@ -1,5 +1,8 @@
+import pickle
 from abc import ABC
 import pandas as pd
+
+from pydantic_models import Predict
 
 
 class BaseModel(ABC):
@@ -14,12 +17,18 @@ class BaseModel(ABC):
         """
         pass
 
-    def predict(self, company_name: str, company_from_db: pd.DataFrame, k: int = 5) -> list[tuple]:
+    def predict(self, company_name: str, db_companies: pd.DataFrame, k: int) -> list[Predict]:
         """
 
         :param company_name: company
-        :param company_from_db: df of company names
+        :param db_companies: df of company names
         :param k: k top relevant company names
         :return: list with tuples.
         """
         pass
+
+    @staticmethod
+    def load_model(path: str):
+        with open(path, "rb") as f:
+            model = pickle.load(f)
+        return model
