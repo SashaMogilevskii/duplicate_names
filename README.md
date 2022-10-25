@@ -25,20 +25,41 @@ pipenv run python main.py
 
 ```
 
+## Architecture & example
+<p align="center"><img src="./src/image/image_1.png" 
+alt="example" width="70%"></p>
 
-## Contributors
 
-1. Шакиров Ренат
-2. Набатчиков Илья
-3. Могилевский Саша
+## Experiments setup
+- Hardware
+    - CPU count: 1
+    - GPU count: 3
+    - GPU type: Tesla T4 / Tesla A16 / GTX 1070TI (with CatBoost)
 
-``` shell
-For contributing please use linterts and hooks the following commands:
+- Training data (in folder data):
+    - Ex.1 (database.csv) with unique values name_1
+    - Ex.2 (database.csv) with unique values name_1_upd
 
-black .
-pre-commit run --all-files
- ```
+## Preprocessing 
 
+ - name_1_upd - unique values after processing.
+ - Preprocessing (services.py):
+    - convert string to english
+    - replace symbols
+    - drop popular stop_words
+
+
+## Our results:
+
+| Model                     | Data          | f1   | Recall | Presicion |
+|---------------------------|---------------|------|--------|-----------|
+| fuzzywuzzy                | Ex.1          | 0.21 | ----   | ----      |
+| fuzzywuzzy                | Ex.1 (unique) | 0.42 | ----   | ----      |
+| tf_idf(400) + LR          | Ex.1 (unique) | 0.54 | 0.43   | 0.92      |
+| tf_idf(400) + LR          | Ex.2 (unique) | 0.63 | 0.48   | 0.92      |
+ | tf_idf(400) + CatBoost    | Ex.2 (unique) | 0.78 | 0.52   | 0.94      |
+ | tf_idf(550) + CatBoost    | Ex.2 (unique) | 0.78 | 0.54   | 0.94      |
+ | fuzzywuzzy(PARTIAL_RATIO) | Ex.2 (unique) | 0.56 | 0.47   | ----       |
 
 ## Tree
 
@@ -75,6 +96,8 @@ notebooks
 src
    |-- configs
    |   |-- config.py
+   |-- image
+   |   |-- image_1.png
    |-- main.py
    |-- models
    |   |-- __init__.py
@@ -87,3 +110,16 @@ src
    |   |-- __init__.py
    |   |-- detection.py
 ```
+
+## Contributors
+
+1. Шакиров Ренат
+2. Набатчиков Илья
+3. Могилевский Саша
+
+``` shell
+For contributing please use linterts and hooks the following commands:
+
+black .
+pre-commit run --all-files
+ ```
