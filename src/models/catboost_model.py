@@ -35,7 +35,7 @@ class CatBoostModel(BaseModel):
         )
 
         predictions = [
-            Predict(company_name=row["name_1"], probability=row["probability"] / 100) for _, row in name_data.iterrows()
+            Predict(company_name=row["name_1"], probability=row["probability"]) for _, row in name_data.iterrows()
         ]
 
         return predictions
