@@ -1,3 +1,5 @@
+import uvicorn
+
 from fastapi import FastAPI, Query
 
 from configs.config import models_paths, rus_letters, list_words
@@ -23,3 +25,6 @@ async def route(
 ) -> list[Predict]:
     list_similar_names = detection.match_companies(company_name=company_name, k=k, model=model)
     return list_similar_names
+
+if __name__ == '__main__':
+    uvicorn.run("main:app", host="0.0.0.0")

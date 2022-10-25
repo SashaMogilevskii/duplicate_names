@@ -25,6 +25,14 @@ pipenv run python main.py
 
 ```
 
+## Run 
+
+``` shell
+cd src
+pipenv run main.py
+
+```
+
 ## Architecture & example
 <p align="center"><img src="./src/image/image_1.png" 
 alt="example" width="70%"></p>
