@@ -57,9 +57,10 @@ alt="example" width="70%"></p>
 | fuzzywuzzy                | Ex.1 (unique) | 0.42 | ----   | ----      |
 | tf_idf(400) + LR          | Ex.1 (unique) | 0.54 | 0.43   | 0.92      |
 | tf_idf(400) + LR          | Ex.2 (unique) | 0.63 | 0.48   | 0.92      |
- | tf_idf(400) + CatBoost    | Ex.2 (unique) | 0.78 | 0.52   | 0.94      |
- | tf_idf(550) + CatBoost    | Ex.2 (unique) | 0.78 | 0.54   | 0.94      |
- | fuzzywuzzy(PARTIAL_RATIO) | Ex.2 (unique) | 0.56 | 0.47   | ----       |
+| tf_idf(400) + CatBoost    | Ex.2 (unique) | 0.78 | 0.52   | 0.94      |
+| tf_idf(550) + CatBoost    | Ex.2 (unique) | 0.78 | 0.54   | 0.94      |
+| fuzzywuzzy(PARTIAL_RATIO) | Ex.2 (unique) | 0.56 | 0.47   | ----      |
+| RoBERTa (4 epochs)        | Data con_engl | 0.96 | 0.96   | 0.96      |
 
 ## Tree
 
@@ -93,6 +94,7 @@ notebooks
    |-- EDA  & Transform data(19_10).ipynb
    |-- EDA  & Transform data.ipynb
    |-- Model_10_22_CatBoost_unique.ipynb
+   |-- Model_RoBERTa.ipynb
 src
    |-- configs
    |   |-- config.py
