@@ -64,3 +64,5 @@ rus_letters = [
     "ю",
     "я",
 ]
+
+models_paths = {'tfidf': '../models/tfidf1.pkl', 'catboost': '../models/catboost.pkl'}
