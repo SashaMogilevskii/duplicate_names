@@ -21,7 +21,8 @@ pipenv install
 pipenv shell
 
 # run main.py:
-pipenv run python main.py
+cd src
+pipenv run main.py
 
 ```
 
