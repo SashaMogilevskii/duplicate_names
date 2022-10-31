@@ -71,6 +71,20 @@ alt="example" width="70%"></p>
 | fuzzywuzzy(PARTIAL_RATIO) | Ex.2 (unique) | 0.56 | 0.47   | ----      |
 | RoBERTa (4 epochs)        | Data con_engl | 0.96 | 0.96   | 0.96      |
 
+
+## Optuna 
+Experience with the selection of hyperparameters
+- Hyperparameters
+    - max_length
+    - batch_size
+    - epochs
+  
+
+<p align="center"><img src="./src/image/image_optuna.png" 
+alt="example" width="95%"></p>
+<p align="center"><img src="./src/image/image_hyperparameters.png" 
+alt="example" width="95%"></p>
+
 ## Tree
 
 ``` shell
@@ -104,10 +118,13 @@ notebooks
    |-- EDA  & Transform data.ipynb
    |-- Model_10_22_CatBoost_unique.ipynb
    |-- Model_RoBERTa.ipynb
+   |-- optuna_BERT.ipynb
 src
    |-- configs
    |   |-- config.py
    |-- image
+   |   |-- image_optuna.png
+   |   |-- image_hyperparameters.png
    |   |-- image_1.png
    |-- main.py
    |-- models
