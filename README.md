@@ -148,6 +148,7 @@ i5-8600K
 
 ## Scaling
 Orchestra of workers using, for example, kubernetes (AWS)
+number of workers = ceil(number of company names / 3 * 10 ** 5)
 
 ## Metrics
 base_metric: F1-score.
