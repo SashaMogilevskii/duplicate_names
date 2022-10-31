@@ -122,6 +122,23 @@ src
    |   |-- detection.py
 ```
 
+## Minimum required equipment
+CPU:
+1 vCPU, 4 Gb RAM
+
+i5-8600K  
+~75 requests per sec
+
+## Scaling
+Orchestra of workers using, for example, kubernetes (AWS)
+
+## Metrics
+base_metric: F1-score.
+additional_metric: recall
+
+justification of the metrics: 
+Sample imbalance led us to choose recall as the main metric.
+
 ## Contributors
 
 1. Шакиров Ренат
